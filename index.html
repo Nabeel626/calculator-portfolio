@@ -4,10 +4,45 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
+
+    <link rel="stylesheet" href="/src/style.css">
+
+    <title>Calculator App</title>
   </head>
   <body>
-    <div id="app"></div>
+
+    <div class="displayNumber">
+      <h1 class="displayNumber--heading">0</h1>
+    </div>
+
+    <section class="userOptions">
+      <div class="userOptions-rowEach">
+        
+        <button class="userOptions-row--clear">C</button>
+        <button class="userOptions-row--pos-neg">+/-</button>
+        <button class="userOptions-row--percentage">%</button>
+        <button class="userOptions-row--divisable">/</button>
+        <button class="userOptions-row--number">7</button>
+        <button class="userOptions-row--number">8</button>
+        <button class="userOptions-row--number">9</button>
+        <button class="userOptions-row--multiply">*</button>
+        <button class="userOptions-row--number">4</button>
+        <button class="userOptions-row--number">5</button>
+        <button class="userOptions-row--number">6</button>
+        <button class="userOptions-row--minus">-</button>
+        <button class="userOptions-row--number">1</button>
+        <button class="userOptions-row--number" value="2">2</button>
+        <button class="userOptions-row--number">3</button>
+        <button class="userOptions-row--add">+</button>
+        <button class="userOptions-row--number">0</button>
+        <button class="userOptions-row--dot">.</button>
+        <button class="userOptions-row--equals">=</button>
+
+      </div>
+
+    </section>
+
     <script type="module" src="/src/main.ts"></script>
+
   </body>
 </html>

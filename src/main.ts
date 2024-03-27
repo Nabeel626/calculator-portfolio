@@ -1,24 +1,24 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+const displayCalculation = document.querySelector<HTMLHeadElement>(".displayNumber--heading");
+const pressNumber = document.querySelector<HTMLButtonElement>("button");
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
-`
+// const numbers: number[] = [0,1,2,3,4,5,6,7,8,9];
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+
+if(!displayCalculation || !pressNumber) {
+  throw new Error("Issue with selector!");
+}
+
+const displayNumber = (event: Event) => {
+
+  const showText = pressNumber.value;
+  
+  if(showText === "2") {
+    displayCalculation.innerText = "Clicked";
+  }
+
+  console.log("button is clicked", showText);
+  
+
+}
+
+pressNumber?.addEventListener("click", displayNumber);
