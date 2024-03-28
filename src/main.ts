@@ -1,24 +1,20 @@
-const displayCalculation = document.querySelector<HTMLHeadElement>(".displayNumber--heading");
+const displayCalculation = document.querySelector<HTMLHeadingElement>(".displayNumber--heading");
 const pressNumber = document.querySelector<HTMLButtonElement>("button");
+const clearButton = document.querySelector<HTMLButtonElement>(".userOptions-row--clear");
 
-// const numbers: number[] = [0,1,2,3,4,5,6,7,8,9];
 
-
-if(!displayCalculation || !pressNumber) {
+if(!displayCalculation || !pressNumber || !clearButton) { //This checks if the query selectors are working, if not then a message will pop up
   throw new Error("Issue with selector!");
 }
 
-const displayNumber = (event: Event) => {
+let clearDisplay = () => { // clear Function to clear the calculator back to 0
 
-  const showText = pressNumber.value;
-  
-  if(showText === "2") {
-    displayCalculation.innerText = "Clicked";
-  }
+  displayCalculation.innerText = "0";
 
-  console.log("button is clicked", showText);
+  console.log("This has been clicked!", displayCalculation); 
   
 
 }
 
-pressNumber?.addEventListener("click", displayNumber);
+
+clearButton.addEventListener("click", clearDisplay) // clear function
