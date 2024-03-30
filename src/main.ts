@@ -70,6 +70,18 @@ const addDotFunction = (event: Event) => {
 }
 
 
+const positiveNegativeFunction = () => {
+
+  if(parseInt(displayCalculation.innerText) > 0) {
+    displayCalculation.innerText = "-" + displayCalculation.innerText;
+  } 
+  else {
+    displayCalculation.innerText = displayCalculation.innerText.replace("-", "");
+  }
+
+}
+
+
 // const addNumbers = (event: Event) => {
 //   const getNumber = event.target as HTMLButtonElement;
 //   let total : number = 0;
@@ -104,6 +116,8 @@ const addDotFunction = (event: Event) => {
 
 clearButton.addEventListener("click", clearDisplay); //clear function
 dotButton?.addEventListener("click", addDotFunction); //add a decimal function
+
+postiveNegativeButton?.addEventListener("click", positiveNegativeFunction); //positive or negative function
 
 
 
