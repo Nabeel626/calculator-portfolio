@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap');
+
 * {
   margin: 0;
   padding: 0;
@@ -5,16 +7,82 @@
 }
 
 body {
-  background-color: black;
   font-family: Arial, Helvetica, sans-serif;
 }
 
+
+
+#loadingSection {
+
+  .loadingSection-heading {
+
+    position: absolute;
+    top: 16%;
+    text-align: center;
+    font-size: 22px;
+    padding: 20px;
+    // color: black;
+    // font-family: "Licorice", cursive;
+    // font-weight: bold;
+    background: 50% 100% / 50% 50% no-repeat
+    radial-gradient(ellipse at bottom, white, white, #b2e1f6);
+    background-clip: text;
+    color: transparent;
+    font-size: 5vw;
+    font-family: "Love Ya Like A Sister", cursive;
+    animation: reveal 3000ms ease-in-out forwards 200ms,
+      glow 2500ms linear infinite 2000ms;
+
+      @keyframes reveal {
+        80%{
+          letter-spacing: 8px;
+        }
+        100% {
+          background-size: 300% 300%;
+        }
+      }
+
+      @keyframes glow {
+        40% {
+        text-shadow: 0 0 10px #fff;
+      }
+    }
+  }
+
+  #loading {
+    position: absolute;
+    left: 52%;
+    top: 53%;
+    z-index: 1;
+    width: 120px;
+    height: 120px;
+    margin: -76px 0 0 -76px;
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #217ab6;
+    animation: spin 1.4s linear infinite;
+  }
+}
+
 .displayNumber {
-  font-size: 40px;
+  font-size: 38px;
   padding: 30px;
   color: white;
   text-align: end;
+
+  .displayNumber--heading {
+    padding: 10px;
+  }
+
 }
+
+.userOptions, .displayNumber {
+  display: none;
+  position: relative;
+  animation-name: animatebottom;
+  animation-duration: 1s;
+}
+
 
 .userOptions-rowEach {
   display: grid;
@@ -26,9 +94,15 @@ body {
   button {
     width: 90px;
     height: 85px;
+    border: none;
     border-radius: 50%;
     padding: 20px;
     font-size: 25px;
+    cursor: pointer;
+    
+    &:hover {
+      filter: brightness(120%);
+    }
 
   }
 
@@ -37,8 +111,8 @@ body {
     color: black;
   }
 
-  .userOptions-row--multiply, .userOptions-row--divisable, .userOptions-row--minus, .userOptions-row--add, .userOptions-row--equals {
-    background-color:  orange;
+  .userOptions-row--operator, .userOptions-row--equals {
+    background-color:  rgb(193, 126, 2);
     color: white;
   }
 
@@ -47,26 +121,45 @@ body {
     color: white;
   }
 
-  .userOptions-row--seperator {
-    // display: grid;
-    // grid-template-areas: 
-    // "zero dot equals";
-    // grid-template-columns: 2fr 1fr 1fr 1fr;
-    // grid-template-rows: 1fr;
-    // gap: 10px;
-
-    .userOptions-row--number {
-      grid-area: zero;
-    }
-
-    .userOptions-row--dot {
-      grid-area: dot;
-    }
-
-    .userOptions-row--equals {
-      grid-area: equals;
-    }
+  .zero-key {
+    grid-column: span 2;
+    width: 95%;
+    border-radius: 50px;
   }
 
+  // .userOptions-row--seperator {
+  //   // display: grid;
+  //   // grid-template-areas: 
+  //   // "zero dot equals";
+  //   // grid-template-columns: 2fr 1fr 1fr 1fr;
+  //   // grid-template-rows: 1fr;
+  //   // gap: 10px;
+
+  //   .userOptions-row--number {
+  //     grid-area: zero;
+  //   }
+
+  //   .userOptions-row--dot {
+  //     grid-area: dot;
+  //   }
+
+  //   .userOptions-row--equals {
+  //     grid-area: equals;
+  //   }
+  // }
+
+}
+
+
+
+//ANIMATIONS
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
 }
 
