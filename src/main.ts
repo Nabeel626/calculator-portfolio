@@ -4,13 +4,14 @@ const clearButton = document.querySelector<HTMLButtonElement>(".userOptions-row-
 const dotButton = document.querySelector<HTMLButtonElement>(".userOptions-row--dot");
 const postiveNegativeButton = document.querySelector(".userOptions-row--pos-neg");
 const pressOperator = document.querySelectorAll<HTMLButtonElement>(".userOptions-row--operator");
-const equalsButton = document.querySelector<HTMLButtonElement>(".userOptions-row--equals");
 
 
-let storeNumbers : number[] = [];
+// let storeNumbers : number[] = [];
+
+let numberArray : number[] = [];
 
 
-if(!displayCalculation || !pressNumber || !clearButton || !dotButton || !postiveNegativeButton || !pressOperator || !equalsButton) { //This checks if the query selectors are working, if not then a message will pop up
+if(!displayCalculation || !pressNumber || !clearButton || !dotButton || !postiveNegativeButton || !pressOperator) { //This checks if the query selectors are working, if not then a message will pop up
   throw new Error("Issue with selector!");
 }
 
@@ -33,7 +34,7 @@ const numberDisplay = (event: Event) => { //number Display function adds the num
     displayCalculation.innerText = "";
   }
 
-    if(displayCalculation.innerText.length < 14) { //Checks the length of the innertext if it is below 15 then run
+    if(displayCalculation.innerText.length < 13) { //Checks the length of the innertext if it is below 15 then run
       displayCalculation.innerText += getNumber.value;
   
     } else {
@@ -41,7 +42,7 @@ const numberDisplay = (event: Event) => { //number Display function adds the num
     }
 
   console.log(getNumber.value);
-  console.log(storeNumbers);
+
   
 }
 
@@ -52,22 +53,10 @@ const chosenOperator = (event: Event) => {
 
 
   if(getOperator.value === "+") {
-    // console.log("The + sign has been added");
 
-
-
-    // if(storeNumbers.length < 2) {
-
-    //   console.log(addNumbers(storeNumbers[0], storeNumbers[1]));
-      
-            
-
-    // } else {
-    //   storeNumbers.length = 0;
-    // }
+    addNumbers();
+    console.log("add has been run");
     
-
-    // addNumbers();
 
   } else if(getOperator.value === "-") {
     console.log("The - sign has been added");
@@ -78,7 +67,10 @@ const chosenOperator = (event: Event) => {
   } else if(getOperator.value === "/") {
     console.log("The / sign has been added");
 
-  } else {
+  } else if(getOperator.value === "=") {
+    console.log("The / sign has been added");
+
+  }  else {
     console.log("No operator has been selected!");
     
   }
@@ -112,88 +104,48 @@ const positiveNegativeFunction = () => {
 }
 
 
-const addNumbers = (num1 : number, num2 : number) => {
-
-  displayCalculation.innerText = displayCalculation.innerText + "+";
-
-
-
-  return num1 + num2;
+const addNumbers = () => {
   
+  let total : number = 0;
 
-  // previousNumber = parseInt(displayCalculation.innerText);
+  if(numberArray.length < 1) {
+   
 
-  // if(currrentNumber == 0) {
+    numberArray.push(Number(displayCalculation.innerText));
 
-  //   displayCalculation.innerText = "0";
-  //   currrentNumber = parseInt(displayCalculation.innerText);
+    displayCalculation.innerText = displayCalculation.innerText + "+";
 
-  //   total = previousNumber + currrentNumber;
-  //   console.log(total);
+    let splitOperator1 = displayCalculation.innerText.split("+");
+    numberArray.push(Number(splitOperator1[1]));
 
-  //   currrentNumber = 0;
+
+    console.log(`number Array length ${numberArray.length}`);
     
 
-  // }
+    console.log(`number Array ${numberArray}`);
+    console.log(`split operator Array ${splitOperator1}`);
+    console.log("IF IS FIRING");
 
-  // console.log(previousNumber);
-  // console.log(currrentNumber);
+  } else {
+
+    let splitOperator2 = displayCalculation.innerText.split("+");
+    numberArray[1] = (Number(splitOperator2[1]));;
+
+
+    total = numberArray[0] + numberArray[1];
+
+    numberArray[0] = total;
+
+    displayCalculation.innerText = total.toString();
+
+    displayCalculation.innerText = displayCalculation.innerText + "+";
+    console.log(`number Array ${numberArray}`);
+    console.log(`split operator Array ${splitOperator2}`);
+    console.log("total is = " + total);
   
-
-  // const addNumberDisplay = event.target as HTMLButtonElement;
-  // const numberArray : number[] = [];
+    console.log("ELSE IS FIRING");
   
-  // let total : number = 0;
-
-  // numberArray[0] = parseInt(displayCalculation.innerText);
-
-  // // numberArray[1] = parseInt(displayCalculation.innerText);
-
-  // total = numberArray[0] + numberArray[1];
-
-
-  // console.log(total + " ADD FUNCTION IN PROGRESS");
-
-  // displayCalculation.innerText = displayCalculation.innerText + "+";
-  // let bob = displayCalculation.innerText.split("+");
-  // bob = bob + displayCalculation.innerText;
-
-  // for(let i = 0; i < 12; i++) {
-  //   bob = parseInt(bob) + bob;
-  // }
-
-  // let total = bob[0] + bob[1];
-
-
-  // console.log(bob[0] + bob[1]);
-  // console.log(total);
-  
-  
-  
-  
-
-  // if((displayCalculation.innerText.length - 1) === parseInt("+")) {
-    
-
-
-  // } else {
-    
-  //   total = parseInt(getNumber.value) + total;
-
-
-
-    
-  //   displayCalculation.innerText += getNumber.value = "+";
-  //   total = parseInt(getNumber.value) + total;
-
-  //   console.log(total);
-
-  //   total = parseInt(displayCalculation.innerText) + total;
-  // }
-
-//   const stringWithNumbers = "Hello123World456";
-// const stringWithoutNumbers = stringWithNumbers.split('').filter(char => isNaN(parseInt(char))).join('');
-// console.log(stringWithoutNumbers);
+  }
 
 }
 
@@ -232,7 +184,7 @@ const showPage = () => {
   const display = document.querySelector(".displayNumber");
   const display2 = document.querySelector(".userOptions");
   
-  body?.setAttribute("style", "height: 100%; background-size: cover; background-repeat:no-repeat; background-image: linear-gradient(to bottom, #99ccff, #8ad4f5, #8dd9e5, #9ddbd5, #b2dcc8);");
+  body?.setAttribute("style", "height: 100%; width: 100vw; height: 100vh; background-size: cover; background-repeat:no-repeat; background-image: linear-gradient(to bottom, #99ccff, #8ad4f5, #8dd9e5, #9ddbd5, #b2dcc8);");
   loader?.setAttribute("style", "display: none;");
   display?.setAttribute("style", "display: block");
   display2?.setAttribute("style", "display: block");
