@@ -68,6 +68,8 @@ const chosenOperator = (event: Event) => {
     console.log("The / sign has been added");
 
   } else if(getOperator.value === "=") {
+    
+    equalTotal();
     console.log("The / sign has been added");
 
   }  else {
@@ -148,6 +150,13 @@ const addNumbers = () => {
   }
 
 }
+
+const equalTotal = () => {
+
+  
+
+}
+
 
 clearButton.addEventListener("click", clearDisplay); //clear function
 dotButton?.addEventListener("click", addDotFunction); //add a decimal function
