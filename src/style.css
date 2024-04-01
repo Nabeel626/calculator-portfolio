@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Love+Ya+Like+A+Sister&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
 * {
   margin: 0;
   padding: 0;
@@ -11,7 +12,7 @@ body {
 
 #loadingSection .loadingSection-heading {
   position: absolute;
-  top: 16%;
+  top: 20%;
   text-align: center;
   font-size: 22px;
   padding: 20px;
@@ -39,7 +40,7 @@ body {
 #loadingSection #loading {
   position: absolute;
   left: 52%;
-  top: 53%;
+  top: 60%;
   z-index: 1;
   width: 120px;
   height: 120px;
@@ -50,16 +51,75 @@ body {
   animation: spin 1.4s linear infinite;
 }
 
+.displaySwitch {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-family: "Press Start 2P", system-ui;
+  grid-template-rows: 1fr;
+  text-align: center;
+}
+.displaySwitch .displaySwitch--switch {
+  position: relative;
+  left: 21%;
+  display: inline-block;
+  width: 100px;
+  height: 34px;
+}
+.displaySwitch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: grey;
+  transition: 0.4s;
+}
+.displaySwitch input:checked + .slider:before {
+  transform: translateX(66px);
+}
+.displaySwitch .slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+}
+.displaySwitch input:checked + .slider {
+  background-color: #2196F3;
+}
+.displaySwitch input:focus + .slider {
+  box-shadow: 5PX 5PX 3px #888888;
+}
+.displaySwitch .slider.round {
+  border-radius: 34px;
+}
+.displaySwitch .slider.round:before {
+  border-radius: 50%;
+}
+
 .displayNumber {
-  font-size: 38px;
-  padding: 30px;
+  font-size: 25px;
+  padding: 40px;
   color: black;
   text-align: end;
 }
 .displayNumber .displayNumber--heading {
-  padding: 10px;
-  border: 2px solid black;
+  padding: 20px;
+  border: 3px solid black;
+  font-family: "Press Start 2P", system-ui;
+  box-shadow: 5px 5px #888888;
   border-radius: 10px;
+}
+
+.userOptions {
+  position: relative;
+  top: 3em;
+  border-radius: 30px;
+  margin: 20px;
 }
 
 .userOptions, .displayNumber {
@@ -73,22 +133,23 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
-  gap: 10px;
-  padding: 20px 5px 20px 20px;
+  gap: 18px;
+  padding: 20px 20px;
 }
 .userOptions-rowEach button {
   width: 90px;
   height: 85px;
-  border: none;
+  box-shadow: 5px 10px #676767;
+  font-family: "Press Start 2P", system-ui;
   border-radius: 50%;
-  padding: 20px;
-  font-size: 25px;
+  padding: 10px;
+  font-size: 22px;
   cursor: pointer;
 }
 .userOptions-rowEach button:hover {
   filter: brightness(120%);
 }
-.userOptions-rowEach .userOptions-row--clear, .userOptions-rowEach .userOptions-row--pos-neg, .userOptions-rowEach .userOptions-row--percentage {
+.userOptions-rowEach .userOptions-row--clear, .userOptions-rowEach .userOptions-row--pos-neg {
   background-color: grey;
   color: black;
 }
@@ -99,6 +160,10 @@ body {
 .userOptions-rowEach .userOptions-row--number, .userOptions-rowEach .userOptions-row--dot {
   background-color: #404040;
   color: white;
+}
+.userOptions-rowEach .percentage-key {
+  background-color: grey;
+  color: black;
 }
 .userOptions-rowEach .zero-key {
   grid-column: span 2;

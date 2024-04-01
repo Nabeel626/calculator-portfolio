@@ -20,6 +20,12 @@ let clearDisplay = () => { // clear Function to clear the calculator back to 0
 
   dotButton.disabled = false;
 
+  pressOperator.forEach((chooseOperator) => {
+
+      chooseOperator.disabled = false;
+
+  });
+
   numberArray.length = 0;
 
   console.log("This has been clicked!", displayCalculation); 
@@ -119,7 +125,14 @@ const addNumbers = () => {
   let total : number = 0;
 
     if(numberArray.length < 1) {
-   
+      
+      pressOperator.forEach((chooseOperator) => {
+
+        if(chooseOperator.value == "%" || chooseOperator.value == "÷" || chooseOperator.value == "x" || chooseOperator.value == "-") {
+          chooseOperator.disabled = true;
+        }
+    
+      });
 
       numberArray.push(Number(displayCalculation.innerText));
   
@@ -165,6 +178,13 @@ const subtractNumbers = () => {
 
   if(numberArray.length < 1) {
    
+    pressOperator.forEach((chooseOperator) => {
+
+      if(chooseOperator.value == "%" || chooseOperator.value == "÷" || chooseOperator.value == "x" || chooseOperator.value == "+") {
+        chooseOperator.disabled = true;
+      }
+  
+    });
 
     numberArray.push(Number(displayCalculation.innerText));
 
@@ -208,8 +228,15 @@ const multiplyNumbers = () => {
 
   let total : number = 0;
 
+  pressOperator.forEach((chooseOperator) => {
+
+    if(chooseOperator.value == "%" || chooseOperator.value == "÷" || chooseOperator.value == "+" || chooseOperator.value == "-") {
+      chooseOperator.disabled = true;
+    }
+
+  });
+
   if(numberArray.length < 1) {
-   
 
     numberArray.push(Number(displayCalculation.innerText));
 
@@ -252,6 +279,14 @@ const multiplyNumbers = () => {
 const divideNumbers = () => {
   
   let total : number = 0;
+
+  pressOperator.forEach((chooseOperator) => {
+
+    if(chooseOperator.value == "%" || chooseOperator.value == "+" || chooseOperator.value == "x" || chooseOperator.value == "-") {
+      chooseOperator.disabled = true;
+    }
+
+  });
 
   if(numberArray.length < 1) {
    
@@ -297,13 +332,12 @@ const divideNumbers = () => {
 const equalTotal = () => {
 
   let sum : number = 0;
-
   let operators = "";
 
   for(let i = 0; i < storeOperator.length; i++) {
 
     if(displayCalculation.innerText.includes(storeOperator[i])) {
-      
+
         operators = storeOperator[i];
 
         console.log(operators);
@@ -312,14 +346,40 @@ const equalTotal = () => {
 
   }
 
+  
   console.log(operators);
 
-  if(displayCalculation.innerText.endsWith(operators)) {
-    alert("CANNOT DO CALCULATION!");
+  if(displayCalculation.innerText.endsWith("%")) {
 
-    displayCalculation.innerText = "0";
+    console.log("percentage total is expected");
 
+    let split7 = displayCalculation.innerText.split("%");  
+    sum = Number(split7[0]) / 100;
+
+    displayCalculation.innerText = sum.toString();
     numberArray.length = 0;
+
+    pressOperator.forEach((chooseOperator) => {
+
+      chooseOperator.disabled = false;
+
+    });
+
+
+  } else if(displayCalculation.innerText.endsWith(operators)) {
+  
+      alert("CANNOT DO CALCULATION!");
+
+      displayCalculation.innerText = "0";
+  
+      numberArray.length = 0;
+
+      pressOperator.forEach((chooseOperator) => {
+
+        chooseOperator.disabled = false;
+  
+    });  
+  
   } else {
 
     switch(operators) {
@@ -363,6 +423,7 @@ const equalTotal = () => {
   
       case "÷":
         console.log("divide total is expected");
+
         let split4 = displayCalculation.innerText.split("÷");
         sum = Number(split4[0]) / Number(split4[1]);
   
@@ -370,13 +431,18 @@ const equalTotal = () => {
         console.log(sum);
   
         numberArray.length = 0;
-  
         break;
-  
+
       default: 
         console.log("nothing is expected");
         break;
     }
+
+    pressOperator.forEach((chooseOperator) => {
+
+      chooseOperator.disabled = false;
+
+    });
 
   }
 
@@ -384,10 +450,31 @@ const equalTotal = () => {
 
 const percentageNumbers = () => {
   
+  if(!displayCalculation.innerText.endsWith("%")) {
+    
+    displayCalculation.innerText = displayCalculation.innerText + "%";
+    
+    pressOperator.forEach((chooseOperator) => {
+
+      if(chooseOperator.value != "=") {
+        chooseOperator.disabled = true;
+      }
+
+    });
+
+    dotButton.disabled = true;
+
+  } else {
+    
+    alert("CANNOT ADD ANOTHER PERCENTAGE!");
+    displayCalculation.innerText = "0";
+
+  }
+
 }
 
 clearButton.addEventListener("click", clearDisplay); //clear function
-dotButton?.addEventListener("click", addDotFunction); //add a decimal function
+dotButton?.addEventListener("click", addDotFunction);
 postiveNegativeButton?.addEventListener("click", positiveNegativeFunction); //positive or negative function
 
 
