@@ -5,10 +5,9 @@ const dotButton = document.querySelector<HTMLButtonElement>(".userOptions-row--d
 const postiveNegativeButton = document.querySelector(".userOptions-row--pos-neg");
 const pressOperator = document.querySelectorAll<HTMLButtonElement>(".userOptions-row--operator");
 
-
-// let storeNumbers : number[] = [];
-
 let numberArray : number[] = [];
+
+const storeOperator : string[] = [];
 
 
 if(!displayCalculation || !pressNumber || !clearButton || !dotButton || !postiveNegativeButton || !pressOperator) { //This checks if the query selectors are working, if not then a message will pop up
@@ -20,6 +19,8 @@ let clearDisplay = () => { // clear Function to clear the calculator back to 0
   displayCalculation.innerText = "0";
 
   dotButton.disabled = false;
+
+  numberArray.length = 0;
 
   console.log("This has been clicked!", displayCalculation); 
   
@@ -50,25 +51,34 @@ const chosenOperator = (event: Event) => {
 
   const getOperator = event.target as HTMLButtonElement;
 
-
-
   if(getOperator.value === "+") {
 
     addNumbers();
     console.log("add has been run");
     
-
   } else if(getOperator.value === "-") {
+
+    subtractNumbers();
     console.log("The - sign has been added");
 
-  } else if(getOperator.value === "*") {
+  } else if(getOperator.value === "x") {
+
+    multiplyNumbers();
     console.log("The * sign has been added");
 
-  } else if(getOperator.value === "/") {
+  } else if(getOperator.value === "÷") {
+
+    divideNumbers();
     console.log("The / sign has been added");
 
+  } else if(getOperator.value === "%") {
+
+    percentageNumbers();
+    console.log("The % sign has been added");
+
   } else if(getOperator.value === "=") {
-    console.log("The / sign has been added");
+    
+    equalTotal();
 
   }  else {
     console.log("No operator has been selected!");
@@ -108,14 +118,59 @@ const addNumbers = () => {
   
   let total : number = 0;
 
+    if(numberArray.length < 1) {
+   
+
+      numberArray.push(Number(displayCalculation.innerText));
+  
+      displayCalculation.innerText = displayCalculation.innerText + "+";
+  
+      let splitOperator1 = displayCalculation.innerText.split("+");
+      numberArray.push(Number(splitOperator1[1]));
+  
+  
+      console.log(`number Array length ${numberArray.length}`);
+      
+  
+      console.log(`number Array ${numberArray}`);
+      console.log(`split operator Array ${splitOperator1}`);
+      console.log("IF IS FIRING");
+  
+    } else {
+  
+      let splitOperator2 = displayCalculation.innerText.split("+");
+      numberArray[1] = (Number(splitOperator2[1]));;
+  
+  
+      total = numberArray[0] + numberArray[1];
+  
+      numberArray[0] = total;
+  
+      displayCalculation.innerText = total.toString();
+  
+      displayCalculation.innerText = displayCalculation.innerText + "+";
+      console.log(`number Array ${numberArray}`);
+      console.log(`split operator Array ${splitOperator2}`);
+      console.log("total is = " + total);
+    
+      console.log("ELSE IS FIRING");
+    
+    }
+
+}
+
+const subtractNumbers = () => {
+
+  let total : number = 0;
+
   if(numberArray.length < 1) {
    
 
     numberArray.push(Number(displayCalculation.innerText));
 
-    displayCalculation.innerText = displayCalculation.innerText + "+";
+    displayCalculation.innerText = displayCalculation.innerText + "-";
 
-    let splitOperator1 = displayCalculation.innerText.split("+");
+    let splitOperator1 = displayCalculation.innerText.split("-");
     numberArray.push(Number(splitOperator1[1]));
 
 
@@ -128,17 +183,17 @@ const addNumbers = () => {
 
   } else {
 
-    let splitOperator2 = displayCalculation.innerText.split("+");
+    let splitOperator2 = displayCalculation.innerText.split("-");
     numberArray[1] = (Number(splitOperator2[1]));;
 
 
-    total = numberArray[0] + numberArray[1];
+    total = numberArray[0] - numberArray[1];
 
     numberArray[0] = total;
 
     displayCalculation.innerText = total.toString();
 
-    displayCalculation.innerText = displayCalculation.innerText + "+";
+    displayCalculation.innerText = displayCalculation.innerText + "-";
     console.log(`number Array ${numberArray}`);
     console.log(`split operator Array ${splitOperator2}`);
     console.log("total is = " + total);
@@ -149,9 +204,190 @@ const addNumbers = () => {
 
 }
 
+const multiplyNumbers = () => {
+
+  let total : number = 0;
+
+  if(numberArray.length < 1) {
+   
+
+    numberArray.push(Number(displayCalculation.innerText));
+
+    displayCalculation.innerText = displayCalculation.innerText + "x";
+
+    let splitOperator1 = displayCalculation.innerText.split("x");
+    numberArray.push(Number(splitOperator1[1]));
+
+
+    console.log(`number Array length ${numberArray.length}`);
+    
+
+    console.log(`number Array ${numberArray}`);
+    console.log(`split operator Array ${splitOperator1}`);
+    console.log("IF IS FIRING");
+
+  } else {
+
+    let splitOperator2 = displayCalculation.innerText.split("x");
+    numberArray[1] = (Number(splitOperator2[1]));;
+
+
+    total = numberArray[0] * numberArray[1];
+
+    numberArray[0] = total;
+
+    displayCalculation.innerText = total.toString();
+
+    displayCalculation.innerText = displayCalculation.innerText + "x";
+    console.log(`number Array ${numberArray}`);
+    console.log(`split operator Array ${splitOperator2}`);
+    console.log("total is = " + total);
+  
+    console.log("ELSE IS FIRING");
+  
+  }
+
+}
+
+const divideNumbers = () => {
+  
+  let total : number = 0;
+
+  if(numberArray.length < 1) {
+   
+
+    numberArray.push(Number(displayCalculation.innerText));
+
+    displayCalculation.innerText = displayCalculation.innerText + "÷";
+
+    let splitOperator1 = displayCalculation.innerText.split("÷");
+    numberArray.push(Number(splitOperator1[1]));
+
+
+    console.log(`number Array length ${numberArray.length}`);
+    
+
+    console.log(`number Array ${numberArray}`);
+    console.log(`split operator Array ${splitOperator1}`);
+    console.log("IF IS FIRING");
+
+  } else {
+
+    let splitOperator2 = displayCalculation.innerText.split("÷");
+    numberArray[1] = (Number(splitOperator2[1]));;
+
+
+    total = numberArray[0] / numberArray[1];
+
+    numberArray[0] = total;
+
+    displayCalculation.innerText = total.toString();
+
+    displayCalculation.innerText = displayCalculation.innerText + "÷";
+    console.log(`number Array ${numberArray}`);
+    console.log(`split operator Array ${splitOperator2}`);
+    console.log("total is = " + total);
+  
+    console.log("ELSE IS FIRING");
+  
+  }
+}
+
+
+const equalTotal = () => {
+
+  let sum : number = 0;
+
+  let operators = "";
+
+  for(let i = 0; i < storeOperator.length; i++) {
+
+    if(displayCalculation.innerText.includes(storeOperator[i])) {
+      
+        operators = storeOperator[i];
+
+        console.log(operators);
+        
+    }
+
+  }
+
+  console.log(operators);
+
+  if(displayCalculation.innerText.endsWith(operators)) {
+    alert("CANNOT DO CALCULATION!");
+
+    displayCalculation.innerText = "0";
+
+    numberArray.length = 0;
+  } else {
+
+    switch(operators) {
+      case "+":
+        console.log("add total is expected");
+  
+        let split1 = displayCalculation.innerText.split("+");
+        sum = Number(split1[0]) + Number(split1[1]);
+  
+        displayCalculation.innerText = sum.toString();
+        console.log(sum);
+  
+        numberArray.length = 0;
+        
+        break;
+  
+      case "-":
+        console.log("minus total is expected");
+        
+        let split2 = displayCalculation.innerText.split("-");
+        sum = Number(split2[0]) - Number(split2[1]);
+  
+        displayCalculation.innerText = sum.toString();
+        console.log(sum);
+  
+        numberArray.length = 0;
+  
+        break;
+  
+      case "x":
+        console.log("times total is expected");
+  
+        let split3 = displayCalculation.innerText.split("x");
+        sum = Number(split3[0]) * Number(split3[1]);
+  
+        displayCalculation.innerText = sum.toString();
+        console.log(sum);
+  
+        numberArray.length = 0;
+        break;
+  
+      case "÷":
+        console.log("divide total is expected");
+        let split4 = displayCalculation.innerText.split("÷");
+        sum = Number(split4[0]) / Number(split4[1]);
+  
+        displayCalculation.innerText = sum.toString();
+        console.log(sum);
+  
+        numberArray.length = 0;
+  
+        break;
+  
+      default: 
+        console.log("nothing is expected");
+        break;
+    }
+
+  }
+
+}
+
+const percentageNumbers = () => {
+  
+}
+
 clearButton.addEventListener("click", clearDisplay); //clear function
 dotButton?.addEventListener("click", addDotFunction); //add a decimal function
-
 postiveNegativeButton?.addEventListener("click", positiveNegativeFunction); //positive or negative function
 
 
@@ -164,6 +400,11 @@ pressNumber.forEach((popUpNumber) => { //Loop through the array of button number
 pressOperator.forEach((popUpOperator) => { //Loop through the array of operator buttons stored when clicked
 
   popUpOperator.addEventListener("click", chosenOperator);
+
+  storeOperator.push(popUpOperator.value)
+
+  console.log(storeOperator);
+  
 
 });
 
