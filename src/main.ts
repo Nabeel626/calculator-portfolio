@@ -44,10 +44,6 @@ const numberDisplay = (event: Event) => { //number Display function adds the num
     displayCalculation.innerText = "";
   }
 
-  // if(displayCalculation.innerText.length > displayCalculation.clientWidth) {
-  //   displayCalculation.style.fontSize = 18 + "px";
-  // }
-
     if(displayCalculation.innerText.length < 15) { //Checks the length of the innertext if it is below 12 then run
       displayCalculation.innerText += getNumber.value;
   
@@ -553,12 +549,14 @@ const showPage = () => {
   const display = document.querySelector(".displayNumber");
   const display2 = document.querySelector(".userOptions");
   const display3 = document.querySelector(".displaySwitch");
+  const showDisplay = document.querySelector(".calculator-body");
   
   body?.setAttribute("style", "height: 100%; width: 100vw; height: 100vh; background-size: cover; background-repeat:no-repeat; background-image: linear-gradient(to bottom, #99ccff, #8ad4f5, #8dd9e5, #9ddbd5, #b2dcc8);");
   loader?.setAttribute("style", "display: none;");
   display?.setAttribute("style", "display: block;");
   display2?.setAttribute("style", "display: block;");
   display3?.setAttribute("style", "display: grid;");
+  showDisplay?.setAttribute("style", "display: block;");
 
 }
 
