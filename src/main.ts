@@ -1,4 +1,7 @@
 const displayCalculation = document.querySelector<HTMLHeadingElement>(".displayNumber--heading");
+
+const switchButtonInput = document.querySelector<HTMLInputElement>(".displaySwitch--switchInput");
+
 const pressNumber = document.querySelectorAll<HTMLButtonElement>(".userOptions-row--number");
 const clearButton = document.querySelector<HTMLButtonElement>(".userOptions-row--clear");
 const dotButton = document.querySelector<HTMLButtonElement>(".userOptions-row--dot");
@@ -10,7 +13,7 @@ let numberArray : number[] = [];
 const storeOperator : string[] = [];
 
 
-if(!displayCalculation || !pressNumber || !clearButton || !dotButton || !postiveNegativeButton || !pressOperator) { //This checks if the query selectors are working, if not then a message will pop up
+if(!displayCalculation || !pressNumber || !clearButton || !dotButton || !postiveNegativeButton || !pressOperator || !switchButtonInput) { //This checks if the query selectors are working, if not then a message will pop up
   throw new Error("Issue with selector!");
 }
 
@@ -41,11 +44,19 @@ const numberDisplay = (event: Event) => { //number Display function adds the num
     displayCalculation.innerText = "";
   }
 
-    if(displayCalculation.innerText.length < 13) { //Checks the length of the innertext if it is below 15 then run
+  // if(displayCalculation.innerText.length > displayCalculation.clientWidth) {
+  //   displayCalculation.style.fontSize = 18 + "px";
+  // }
+
+    if(displayCalculation.innerText.length < 15) { //Checks the length of the innertext if it is below 12 then run
       displayCalculation.innerText += getNumber.value;
   
     } else {
-      displayCalculation.innerText = "ERROR CANNOT LOAD MORE!";
+      
+      alert("ERROR!");
+      displayCalculation.style.fontSize = 30 + "px";
+      displayCalculation.innerText = "0";
+      
     }
 
   console.log(getNumber.value);
@@ -473,6 +484,37 @@ const percentageNumbers = () => {
 
 }
 
+const switchChange = () => {
+
+  const displayouterHeading = document.querySelector(".displayNumber");
+  const calculatorButtons = document.querySelector(".userOptions");
+  const changeFont1 = document.querySelector(".offswitch");
+  const changeFont2 = document.querySelector(".onswitch");
+
+  if(switchButtonInput.checked) {
+    body?.setAttribute("style", "height: 100%; width: 100vw; height: 100vh; background-size: cover; background-repeat:no-repeat; background-image: linear-gradient(to bottom, #99ccff, #8ad4f5, #8dd9e5, #9ddbd5, #b2dcc8);");
+    displayouterHeading?.setAttribute("style", "display: block;");
+    calculatorButtons?.setAttribute("style", "display: block;");
+    changeFont1?.setAttribute("style", "color: black;");
+    changeFont2?.setAttribute("style", "color: black;");
+
+    console.log("IS WORKING");
+    
+
+  } else {
+    body?.setAttribute("style", "background-color: black;");
+    displayouterHeading?.setAttribute("style", "display: block; opacity: 0.1;");
+    calculatorButtons?.setAttribute("style", "display: block; opacity: 0.1;");
+    changeFont1?.setAttribute("style", "color: white;");
+    changeFont2?.setAttribute("style", "color: white;");
+
+    console.log("IS NOT WORKING");
+  }
+
+}
+
+switchButtonInput.addEventListener("change", switchChange);
+
 clearButton.addEventListener("click", clearDisplay); //clear function
 dotButton?.addEventListener("click", addDotFunction);
 postiveNegativeButton?.addEventListener("click", positiveNegativeFunction); //positive or negative function
@@ -506,20 +548,22 @@ const onPageLoad = () => {
   load = setTimeout(showPage, 6500); //this determines the loading time which is 3 seconds
 }
 
-
 const showPage = () => {
   const loader = document.querySelector("#loadingSection");
   const display = document.querySelector(".displayNumber");
   const display2 = document.querySelector(".userOptions");
+  const display3 = document.querySelector(".displaySwitch");
   
   body?.setAttribute("style", "height: 100%; width: 100vw; height: 100vh; background-size: cover; background-repeat:no-repeat; background-image: linear-gradient(to bottom, #99ccff, #8ad4f5, #8dd9e5, #9ddbd5, #b2dcc8);");
   loader?.setAttribute("style", "display: none;");
-  display?.setAttribute("style", "display: block");
-  display2?.setAttribute("style", "display: block");
+  display?.setAttribute("style", "display: block;");
+  display2?.setAttribute("style", "display: block;");
+  display3?.setAttribute("style", "display: grid;");
 
 }
 
-window.onload = () => {
+window.onload = () => { //When the window starts then it will run the page load function
   
   onPageLoad();
+
 }
