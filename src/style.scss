@@ -7,9 +7,6 @@
   box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-}
 
 #loadingSection {
 
@@ -68,10 +65,10 @@ body {
   position: relative;
   top: 0.3em;
   display: none;
-  animation-name: animatebottom;
   padding: 0px 30px 0px 30px;
   height: 0;
-  animation-duration: 2s;
+  animation-name: animatebottom;
+  animation-duration: 1s;
 
   .displaySwitch--switch {
     position: relative;
@@ -220,5 +217,127 @@ body {
 @keyframes animatebottom { 
   from { bottom:-200px; opacity:0; } 
   to { bottom:0; opacity:1; }
+}
+
+
+
+//DESKTOP VERSION
+
+@media screen and (min-width: 788px) {
+
+  .calculator-body {
+    margin: auto;
+    padding: 40px;
+    display: none;
+    width: 35%;
+    background-color: #bfbfbf;
+    border: 2px solid grey;
+    border-radius: 40px;
+    box-shadow: 20px 30px 2px #545454;
+    animation-name: animatebottom;
+    animation-duration: 1s;
+  }
+
+  #loadingSection {
+    width: 80%;
+
+    .loadingSection-heading {
+      position: absolute;
+      top: 24%;
+      left: 23%;
+      padding: 10px;
+      background: 50% 10% / 10% 50% no-repeat
+      radial-gradient(ellipse at bottom, white, white, #b2e1f6);
+      background-clip: text;
+      color: transparent;
+      font-size: 2vw;
+      font-family: "Love Ya Like A Sister", cursive;
+      animation: reveal 3000ms ease-in-out forwards 200ms,
+        glow 2500ms linear infinite 2000ms;
+    }
+
+    #loading {
+      position: absolute;
+      left: 52%;
+      top: 60%;
+    }
+
+  }
+
+  .displaySwitch {
+    position: inherit;
+    top: 0em;
+    padding: 0px 60px 20px;
+    width: 100%;
+    background-color: #8c8c8c;
+    height: auto;
+    border-radius: 0px 0px 20px 20px;
+
+    .displaySwitch--switch {
+      width: 6vw;
+    }
+  }
+
+  .displayNumber {
+    border-radius: 20px 20px 0px 0px;
+    background-color: #8c8c8c;
+
+    .displayNumber--heading {
+      background-color: #e6ffe6;
+    }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 1vw;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: .4s;
+    }
+  }
+
+  .userOptions {
+    border-radius: 30px;
+    padding: 0px 10px;
+    max-width: 100%;
+    height: auto;
+    position: relative;
+    top: 1em;
+    margin: 10px;
+
+    .userOptions-rowEach {
+
+      button {
+        width: 5.2vw;
+        height: 85px;
+        box-shadow: 5px 10px #676767;
+        font-family: "Press Start 2P", system-ui;
+        border-radius: 50%;
+        padding: 10px;
+        font-size: 22px;
+      }
+
+      .zero-key {
+        grid-column: span 2;
+        width: 95%;
+        border-radius: 50px;
+      }
+
+    }
+  }
+
+
+
 }
 
