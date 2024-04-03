@@ -537,13 +537,10 @@ pressOperator.forEach((popUpOperator) => { //Loop through the array of operator 
 const body = document.querySelector("body");
 
 const onPageLoad = () => {
-  let load : number;
   
   body?.setAttribute("style", "background-color: #99ccff;");
 
-  load = setTimeout(showPage, 6500);
-  console.log(load);
-   //this determines the loading time which is 3 seconds
+  setTimeout(showPage, 6500); //this determines the loading time which is 3 seconds
 }
 
 const showPage = () => {
@@ -566,5 +563,4 @@ window.onload = () => { //When the window starts then it will run the page load 
   
   onPageLoad();
  
-
 }
