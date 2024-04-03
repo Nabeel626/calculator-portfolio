@@ -1,7 +1,6 @@
 const displayCalculation = document.querySelector<HTMLHeadingElement>(".displayNumber--heading");
-
+const body = document.querySelector("body");
 const switchButtonInput = document.querySelector<HTMLInputElement>(".displaySwitch--switchInput");
-
 const pressNumber = document.querySelectorAll<HTMLButtonElement>(".userOptions-row--number");
 const clearButton = document.querySelector<HTMLButtonElement>(".userOptions-row--clear");
 const dotButton = document.querySelector<HTMLButtonElement>(".userOptions-row--dot");
@@ -90,7 +89,8 @@ const chosenOperator = (event: Event) => {
     console.log("The % sign has been added");
 
   } else if(getOperator.value === "=") {
-    
+
+
     equalTotal();
 
   }  else {
@@ -104,16 +104,19 @@ const addDotFunction = (event: Event) => {
 
   const getDot = event.target as HTMLButtonElement;
 
-  displayCalculation.innerText += getDot.value; 
+  console.log(numberArray.length);
+  
 
-  if(displayCalculation.innerText.endsWith(".")) {
+  if(numberArray.length < 3) {
       
-    dotButton.disabled = true;
-    
+    displayCalculation.innerText += getDot.value;
+
+    getDot.disabled = true;
+
+    console.log("poinnt added in if");
+
   }
-
 }
-
 
 const positiveNegativeFunction = () => {
 
@@ -130,6 +133,8 @@ const positiveNegativeFunction = () => {
 const addNumbers = () => {
   
   let total : number = 0;
+
+  dotButton.disabled = false;
 
     if(numberArray.length < 1) {
       
@@ -150,8 +155,6 @@ const addNumbers = () => {
   
   
       console.log(`number Array length ${numberArray.length}`);
-      
-  
       console.log(`number Array ${numberArray}`);
       console.log(`split operator Array ${splitOperator1}`);
       console.log("IF IS FIRING");
@@ -161,9 +164,10 @@ const addNumbers = () => {
       let splitOperator2 = displayCalculation.innerText.split("+");
       numberArray[1] = (Number(splitOperator2[1]));;
   
-  
       total = numberArray[0] + numberArray[1];
   
+      total = Number(total.toFixed(2));
+
       numberArray[0] = total;
   
       displayCalculation.innerText = total.toString();
@@ -183,6 +187,10 @@ const subtractNumbers = () => {
 
   let total : number = 0;
 
+  dotButton.disabled = false;
+
+  console.log(dotButton.disabled);
+  
   if(numberArray.length < 1) {
    
     pressOperator.forEach((chooseOperator) => {
@@ -200,10 +208,10 @@ const subtractNumbers = () => {
     let splitOperator1 = displayCalculation.innerText.split("-");
     numberArray.push(Number(splitOperator1[1]));
 
+    numberArray[1] = 0;
+    splitOperator1[1] = String(0);
 
     console.log(`number Array length ${numberArray.length}`);
-    
-
     console.log(`number Array ${numberArray}`);
     console.log(`split operator Array ${splitOperator1}`);
     console.log("IF IS FIRING");
@@ -211,29 +219,36 @@ const subtractNumbers = () => {
   } else {
 
     let splitOperator2 = displayCalculation.innerText.split("-");
-    numberArray[1] = (Number(splitOperator2[1]));;
 
+    if(splitOperator2.length > 2) {
+      splitOperator2.shift();
+    } 
+
+    numberArray[1] = (Number(splitOperator2[1]));
 
     total = numberArray[0] - numberArray[1];
+
+    total = Number(total.toFixed(2));
 
     numberArray[0] = total;
 
     displayCalculation.innerText = total.toString();
 
     displayCalculation.innerText = displayCalculation.innerText + "-";
+
     console.log(`number Array ${numberArray}`);
     console.log(`split operator Array ${splitOperator2}`);
     console.log("total is = " + total);
-  
     console.log("ELSE IS FIRING");
   
   }
-
 }
 
 const multiplyNumbers = () => {
 
   let total : number = 0;
+
+  dotButton.disabled = false;
 
   pressOperator.forEach((chooseOperator) => {
 
@@ -254,8 +269,6 @@ const multiplyNumbers = () => {
 
 
     console.log(`number Array length ${numberArray.length}`);
-    
-
     console.log(`number Array ${numberArray}`);
     console.log(`split operator Array ${splitOperator1}`);
     console.log("IF IS FIRING");
@@ -265,8 +278,9 @@ const multiplyNumbers = () => {
     let splitOperator2 = displayCalculation.innerText.split("x");
     numberArray[1] = (Number(splitOperator2[1]));;
 
-
     total = numberArray[0] * numberArray[1];
+
+    total = Number(total.toFixed(2));
 
     numberArray[0] = total;
 
@@ -280,12 +294,13 @@ const multiplyNumbers = () => {
     console.log("ELSE IS FIRING");
   
   }
-
 }
 
 const divideNumbers = () => {
   
   let total : number = 0;
+
+  dotButton.disabled = false;
 
   pressOperator.forEach((chooseOperator) => {
 
@@ -297,18 +312,13 @@ const divideNumbers = () => {
 
   if(numberArray.length < 1) {
    
-
     numberArray.push(Number(displayCalculation.innerText));
-
     displayCalculation.innerText = displayCalculation.innerText + "÷";
 
     let splitOperator1 = displayCalculation.innerText.split("÷");
     numberArray.push(Number(splitOperator1[1]));
 
-
     console.log(`number Array length ${numberArray.length}`);
-    
-
     console.log(`number Array ${numberArray}`);
     console.log(`split operator Array ${splitOperator1}`);
     console.log("IF IS FIRING");
@@ -318,9 +328,8 @@ const divideNumbers = () => {
     let splitOperator2 = displayCalculation.innerText.split("÷");
     numberArray[1] = (Number(splitOperator2[1]));;
 
-
     total = numberArray[0] / numberArray[1];
-
+    total = Number(total.toFixed(2));
     numberArray[0] = total;
 
     displayCalculation.innerText = total.toString();
@@ -331,10 +340,8 @@ const divideNumbers = () => {
     console.log("total is = " + total);
   
     console.log("ELSE IS FIRING");
-  
   }
 }
-
 
 const equalTotal = () => {
 
@@ -348,12 +355,9 @@ const equalTotal = () => {
         operators = storeOperator[i];
 
         console.log(operators);
-        
     }
-
   }
 
-  
   console.log(operators);
 
   if(displayCalculation.innerText.endsWith("%")) {
@@ -371,7 +375,6 @@ const equalTotal = () => {
       chooseOperator.disabled = false;
 
     });
-
 
   } else if(displayCalculation.innerText.endsWith(operators)) {
   
@@ -395,7 +398,9 @@ const equalTotal = () => {
   
         let split1 = displayCalculation.innerText.split("+");
         sum = Number(split1[0]) + Number(split1[1]);
-  
+      
+        sum = Number(sum.toFixed(2));
+
         displayCalculation.innerText = sum.toString();
         console.log(sum);
   
@@ -406,14 +411,12 @@ const equalTotal = () => {
       case "-":
         console.log("minus total is expected");
         
-        let split2 = displayCalculation.innerText.split("-");
-        sum = Number(split2[0]) - Number(split2[1]);
-  
-        displayCalculation.innerText = sum.toString();
-        console.log(sum);
+        subtractNumbers();
+        if(displayCalculation.innerText.endsWith("-")) {
+          displayCalculation.innerText = displayCalculation.innerText.substring(0,displayCalculation.innerText.length - 1);
+        }
   
         numberArray.length = 0;
-  
         break;
   
       case "x":
@@ -421,10 +424,17 @@ const equalTotal = () => {
   
         let split3 = displayCalculation.innerText.split("x");
         sum = Number(split3[0]) * Number(split3[1]);
+
+        sum = Number(sum.toFixed(2));
   
         displayCalculation.innerText = sum.toString();
         console.log(sum);
-  
+
+        // multiplyNumbers();
+        // if(displayCalculation.innerText.endsWith("x")) {
+        //   displayCalculation.innerText = displayCalculation.innerText.substring(0,displayCalculation.innerText.length - 1);
+        // }
+
         numberArray.length = 0;
         break;
   
@@ -433,10 +443,17 @@ const equalTotal = () => {
 
         let split4 = displayCalculation.innerText.split("÷");
         sum = Number(split4[0]) / Number(split4[1]);
+
+        sum = Number(sum.toFixed(2));
   
         displayCalculation.innerText = sum.toString();
         console.log(sum);
-  
+        
+        // divideNumbers();
+        // if(displayCalculation.innerText.endsWith("÷")) {
+        //   displayCalculation.innerText = displayCalculation.innerText.substring(0,displayCalculation.innerText.length - 1);
+        // }
+
         numberArray.length = 0;
         break;
 
@@ -450,9 +467,7 @@ const equalTotal = () => {
       chooseOperator.disabled = false;
 
     });
-
   }
-
 }
 
 const percentageNumbers = () => {
@@ -466,18 +481,13 @@ const percentageNumbers = () => {
       if(chooseOperator.value != "=") {
         chooseOperator.disabled = true;
       }
-
+      
     });
 
-    dotButton.disabled = true;
-
-  } else {
-    
+  } else { 
     alert("CANNOT ADD ANOTHER PERCENTAGE!");
     displayCalculation.innerText = "0";
-
   }
-
 }
 
 const switchChange = () => {
@@ -488,7 +498,7 @@ const switchChange = () => {
   const changeFont2 = document.querySelector(".onswitch");
 
   if(switchButtonInput.checked) {
-    body?.setAttribute("style", "height: 100%; width: 100vw; height: 100vh; background-size: cover; background-repeat:no-repeat; background-image: linear-gradient(to bottom, #99ccff, #8ad4f5, #8dd9e5, #9ddbd5, #b2dcc8);");
+    body?.setAttribute("style", "width: 100vw; height: 100vh; background-size: cover; background-repeat:no-repeat; background-image: linear-gradient(to bottom, #99ccff, #8ad4f5, #8dd9e5, #9ddbd5, #b2dcc8);");
     displayouterHeading?.setAttribute("style", "display: block;");
     calculatorButtons?.setAttribute("style", "display: block;");
     changeFont1?.setAttribute("style", "color: black;");
@@ -510,7 +520,6 @@ const switchChange = () => {
 }
 
 switchButtonInput.addEventListener("change", switchChange);
-
 clearButton.addEventListener("click", clearDisplay); //clear function
 dotButton?.addEventListener("click", addDotFunction);
 postiveNegativeButton?.addEventListener("click", positiveNegativeFunction); //positive or negative function
@@ -533,9 +542,6 @@ pressOperator.forEach((popUpOperator) => { //Loop through the array of operator 
 
 });
 
-
-const body = document.querySelector("body");
-
 const onPageLoad = () => {
   
   body?.setAttribute("style", "background-color: #99ccff;");
@@ -550,7 +556,7 @@ const showPage = () => {
   const display3 = document.querySelector(".displaySwitch");
   const showDisplay = document.querySelector(".calculator-body");
   
-  body?.setAttribute("style", "height: 100%; width: 100vw; height: 100vh; background-size: cover; background-repeat:no-repeat; background-image: linear-gradient(to bottom, #99ccff, #8ad4f5, #8dd9e5, #9ddbd5, #b2dcc8);");
+  body?.setAttribute("style", "width: 100vw; height: 100vh; background-size: cover; background-repeat:no-repeat; background-image: linear-gradient(to bottom, #99ccff, #8ad4f5, #8dd9e5, #9ddbd5, #b2dcc8);");
   loader?.setAttribute("style", "display: none;");
   display?.setAttribute("style", "display: block;");
   display2?.setAttribute("style", "display: block;");

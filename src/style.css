@@ -174,6 +174,10 @@
   border-radius: 50px;
 }
 
+.area {
+  display: none;
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -192,13 +196,97 @@
     opacity: 1;
   }
 }
-@media screen and (min-width: 788px) {
+@media screen and (min-width: 900px) {
   .calculator-body {
+    position: relative;
+    top: 2em;
     margin: auto;
     padding: 40px;
     display: none;
     width: 35%;
+    height: 90%;
     background-color: #bfbfbf;
+    z-index: 2;
+    border: 2px solid grey;
+    border-radius: 40px;
+    box-shadow: 20px 30px 2px #545454;
+    animation-name: animatebottom;
+    animation-duration: 1s;
+  }
+  .displayNumber {
+    border-radius: 20px 20px 20px 20px;
+    padding-bottom: 80px;
+    background-color: #8c8c8c;
+  }
+  .displayNumber .displayNumber--heading {
+    background-color: #e6ffe6;
+  }
+  .displaySwitch {
+    position: relative;
+    top: -4em;
+    padding: 10px 60px 20px;
+    width: 100%;
+    height: auto;
+    border-radius: 0px 0px 20px 20px;
+  }
+  .displaySwitch .displaySwitch--switch {
+    width: 6vw;
+  }
+  .displaySwitch .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .displaySwitch .slider.round {
+    width: 5vw;
+  }
+  .displaySwitch .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 1.7vw;
+    bottom: 4px;
+    left: -30px;
+    background-color: white;
+    transition: 0.4s;
+  }
+  .userOptions {
+    max-width: 100%;
+    width: 80vw;
+    height: auto;
+    position: relative;
+    top: -4.1em;
+    margin: 1px;
+  }
+  .userOptions .userOptions-rowEach button {
+    width: 100%;
+    height: 85px;
+    box-shadow: 5px 10px #676767;
+    font-family: "Press Start 2P", system-ui;
+    border-radius: 10%;
+    padding: 10px;
+    font-size: 1.5vw;
+  }
+  .userOptions .userOptions-rowEach .zero-key {
+    grid-column: span 2;
+    width: 95%;
+    border-radius: 10px;
+  }
+}
+@media screen and (min-width: 1300px) {
+  .calculator-body {
+    position: relative;
+    top: 2em;
+    margin: auto;
+    padding: 40px;
+    display: none;
+    width: 35%;
+    height: 90%;
+    background-color: #bfbfbf;
+    z-index: 2;
     border: 2px solid grey;
     border-radius: 40px;
     box-shadow: 20px 30px 2px #545454;
@@ -227,25 +315,16 @@
     top: 60%;
   }
   .displaySwitch {
-    position: inherit;
-    top: 0em;
-    padding: 0px 60px 20px;
+    position: relative;
+    top: -4em;
+    padding: 10px 60px 20px;
     width: 100%;
-    background-color: #8c8c8c;
     height: auto;
-    border-radius: 0px 0px 20px 20px;
   }
   .displaySwitch .displaySwitch--switch {
     width: 6vw;
   }
-  .displayNumber {
-    border-radius: 20px 20px 0px 0px;
-    background-color: #8c8c8c;
-  }
-  .displayNumber .displayNumber--heading {
-    background-color: #e6ffe6;
-  }
-  .displayNumber .slider {
+  .displaySwitch .slider {
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -253,37 +332,157 @@
     right: 0;
     bottom: 0;
   }
-  .displayNumber .slider:before {
+  .displaySwitch .slider.round {
+    width: 6vw;
+  }
+  .displaySwitch .slider:before {
     position: absolute;
     content: "";
     height: 26px;
-    width: 1vw;
+    width: 1.5vw;
     left: 4px;
     bottom: 4px;
     background-color: white;
     transition: 0.4s;
   }
+  .displayNumber {
+    border-radius: 20px;
+    background-color: #8c8c8c;
+  }
+  .displayNumber .displayNumber--heading {
+    background-color: #e6ffe6;
+  }
   .userOptions {
-    border-radius: 30px;
-    padding: 0px 10px;
     max-width: 100%;
+    width: 80vw;
     height: auto;
     position: relative;
-    top: 1em;
-    margin: 10px;
+    top: -4em;
+    margin: 1px;
   }
   .userOptions .userOptions-rowEach button {
-    width: 5.2vw;
+    width: 100%;
     height: 85px;
     box-shadow: 5px 10px #676767;
     font-family: "Press Start 2P", system-ui;
-    border-radius: 50%;
+    border-radius: 10%;
     padding: 10px;
-    font-size: 22px;
+    font-size: 1.5vw;
   }
   .userOptions .userOptions-rowEach .zero-key {
     grid-column: span 2;
     width: 95%;
-    border-radius: 50px;
+    border-radius: 10px;
+  }
+  .area {
+    width: 100%;
+    z-index: 1;
+    height: auto;
+    display: block;
+  }
+  .circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .circles li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.2);
+    animation: animate 25s linear infinite;
+    bottom: -150px;
+  }
+  .circles li:nth-child(1) {
+    left: 25%;
+    background: linear-gradient(to left, #bfc2ff, #6b70c3);
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+  }
+  .circles li:nth-child(2) {
+    left: 10%;
+    background: linear-gradient(to left, #bfc2ff, #6b70c3);
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+  }
+  .circles li:nth-child(3) {
+    left: 70%;
+    background: linear-gradient(to left, #bfc2ff, #6b70c3);
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+  }
+  .circles li:nth-child(4) {
+    left: 40%;
+    background: linear-gradient(to left, #bfc2ff, #6b70c3);
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+  }
+  .circles li:nth-child(5) {
+    left: 65%;
+    background: linear-gradient(to left, #bfc2ff, #6b70c3);
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+  }
+  .circles li:nth-child(6) {
+    left: 75%;
+    background: linear-gradient(to left, #bfc2ff, #6b70c3);
+    width: 110px;
+    height: 110px;
+    animation-delay: 3s;
+  }
+  .circles li:nth-child(7) {
+    left: 5%;
+    background: linear-gradient(to left, #bfc2ff, #6b70c3);
+    width: 150px;
+    height: 150px;
+    animation-delay: 7s;
+  }
+  .circles li:nth-child(8) {
+    left: 50%;
+    background: linear-gradient(to left, #bfc2ff, #6b70c3);
+    width: 25px;
+    height: 25px;
+    animation-delay: 15s;
+    animation-duration: 45s;
+  }
+  .circles li:nth-child(9) {
+    left: 20%;
+    background: linear-gradient(to left, #bfc2ff, #6b70c3);
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 35s;
+  }
+  .circles li:nth-child(10) {
+    left: 85%;
+    background: linear-gradient(to left, #bfc2ff, #6b70c3);
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 11s;
+  }
+  @keyframes animate {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+      border-radius: 0;
+    }
+    100% {
+      transform: translateY(-1000px) rotate(720deg);
+      opacity: 0;
+      border-radius: 50%;
+    }
   }
 }/*# sourceMappingURL=style.css.map */
