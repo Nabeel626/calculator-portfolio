@@ -537,7 +537,7 @@ pressOperator.forEach((popUpOperator) => { //Loop through the array of operator 
 const body = document.querySelector("body");
 
 const onPageLoad = () => {
-  let load;
+  let load : number;
   
   body?.setAttribute("style", "background-color: #99ccff;");
 
