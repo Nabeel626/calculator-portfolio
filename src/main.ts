@@ -541,7 +541,9 @@ const onPageLoad = () => {
   
   body?.setAttribute("style", "background-color: #99ccff;");
 
-  load = setTimeout(showPage, 6500); //this determines the loading time which is 3 seconds
+  load = setTimeout(showPage, 6500);
+  console.log(load);
+   //this determines the loading time which is 3 seconds
 }
 
 const showPage = () => {
@@ -563,5 +565,6 @@ const showPage = () => {
 window.onload = () => { //When the window starts then it will run the page load function
   
   onPageLoad();
+ 
 
 }
