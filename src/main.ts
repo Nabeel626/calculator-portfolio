@@ -11,7 +11,6 @@ let numberArray : number[] = [];
 
 const storeOperator : string[] = [];
 
-
 if(!displayCalculation || !pressNumber || !clearButton || !dotButton || !postiveNegativeButton || !pressOperator || !switchButtonInput) { //This checks if the query selectors are working, if not then a message will pop up
   throw new Error("Issue with selector!");
 }
@@ -29,11 +28,8 @@ let clearDisplay = () => { // clear Function to clear the calculator back to 0
   });
 
   numberArray.length = 0;
-
   console.log("This has been clicked!", displayCalculation); 
-  
 }
-
 
 const numberDisplay = (event: Event) => { //number Display function adds the number to main heading so that it can be seen
   
@@ -43,23 +39,19 @@ const numberDisplay = (event: Event) => { //number Display function adds the num
     displayCalculation.innerText = "";
   }
 
-    if(displayCalculation.innerText.length < 15) { //Checks the length of the innertext if it is below 12 then run
+    if(displayCalculation.innerText.length < 15) { //Checks the length of the innertext if it is below 15 then run
       displayCalculation.innerText += getNumber.value;
   
     } else {
       
-      alert("ERROR!");
+      alert("ERROR!"); //This gives an ERROR when the length is above 15
       displayCalculation.style.fontSize = 30 + "px";
       displayCalculation.innerText = "0";
       
     }
-
-  console.log(getNumber.value);
-
-  
 }
 
-const chosenOperator = (event: Event) => {
+const chosenOperator = (event: Event) => { //This gets the chosen operator and sees which of teh cases are working
 
   const getOperator = event.target as HTMLButtonElement;
 
@@ -90,14 +82,12 @@ const chosenOperator = (event: Event) => {
 
   } else if(getOperator.value === "=") {
 
-
     equalTotal();
 
   }  else {
     console.log("No operator has been selected!");
     
   }
-
 }
 
 const addDotFunction = (event: Event) => {
@@ -130,15 +120,14 @@ const positiveNegativeFunction = () => {
 }
 
 
-const addNumbers = () => {
+const addNumbers = () => { //This is the add function
   
   let total : number = 0;
-
   dotButton.disabled = false;
 
     if(numberArray.length < 1) {
       
-      pressOperator.forEach((chooseOperator) => {
+      pressOperator.forEach((chooseOperator) => { //This checks the operators and then disbales them accordingly
 
         if(chooseOperator.value == "%" || chooseOperator.value == "÷" || chooseOperator.value == "x" || chooseOperator.value == "-") {
           chooseOperator.disabled = true;
@@ -146,13 +135,12 @@ const addNumbers = () => {
     
       });
 
-      numberArray.push(Number(displayCalculation.innerText));
+      numberArray.push(Number(displayCalculation.innerText)); //This pushes add the end of the array
   
       displayCalculation.innerText = displayCalculation.innerText + "+";
   
-      let splitOperator1 = displayCalculation.innerText.split("+");
-      numberArray.push(Number(splitOperator1[1]));
-  
+      let splitOperator1 = displayCalculation.innerText.split("+"); //This splits whatever is inside the display and create an array 
+      numberArray.push(Number(splitOperator1[1])); //This pushes add the end of the array from the other array
   
       console.log(`number Array length ${numberArray.length}`);
       console.log(`number Array ${numberArray}`);
@@ -161,35 +149,29 @@ const addNumbers = () => {
   
     } else {
   
-      let splitOperator2 = displayCalculation.innerText.split("+");
-      numberArray[1] = (Number(splitOperator2[1]));;
+      let splitOperator2 = displayCalculation.innerText.split("+"); //This splits whatever is inside the display and create an array 
+      numberArray[1] = (Number(splitOperator2[1]));; //This pushes add the end of the array from the other array
   
-      total = numberArray[0] + numberArray[1];
-  
-      total = Number(total.toFixed(2));
+      total = numberArray[0] + numberArray[1]; //This figures out the total
+      total = Number(total.toFixed(2)); //This rounds the total to the nearest 2 decimal place
 
       numberArray[0] = total;
   
       displayCalculation.innerText = total.toString();
-  
       displayCalculation.innerText = displayCalculation.innerText + "+";
+
       console.log(`number Array ${numberArray}`);
       console.log(`split operator Array ${splitOperator2}`);
       console.log("total is = " + total);
-    
       console.log("ELSE IS FIRING");
     
     }
-
 }
 
 const subtractNumbers = () => {
 
   let total : number = 0;
-
   dotButton.disabled = false;
-
-  console.log(dotButton.disabled);
   
   if(numberArray.length < 1) {
    
@@ -227,13 +209,11 @@ const subtractNumbers = () => {
     numberArray[1] = (Number(splitOperator2[1]));
 
     total = numberArray[0] - numberArray[1];
-
     total = Number(total.toFixed(2));
 
     numberArray[0] = total;
 
     displayCalculation.innerText = total.toString();
-
     displayCalculation.innerText = displayCalculation.innerText + "-";
 
     console.log(`number Array ${numberArray}`);
@@ -247,7 +227,6 @@ const subtractNumbers = () => {
 const multiplyNumbers = () => {
 
   let total : number = 0;
-
   dotButton.disabled = false;
 
   pressOperator.forEach((chooseOperator) => {
@@ -261,12 +240,10 @@ const multiplyNumbers = () => {
   if(numberArray.length < 1) {
 
     numberArray.push(Number(displayCalculation.innerText));
-
     displayCalculation.innerText = displayCalculation.innerText + "x";
 
     let splitOperator1 = displayCalculation.innerText.split("x");
     numberArray.push(Number(splitOperator1[1]));
-
 
     console.log(`number Array length ${numberArray.length}`);
     console.log(`number Array ${numberArray}`);
@@ -275,22 +252,20 @@ const multiplyNumbers = () => {
 
   } else {
 
-    let splitOperator2 = displayCalculation.innerText.split("x");
-    numberArray[1] = (Number(splitOperator2[1]));;
+    let splitOperator2 = displayCalculation.innerText.split("x");    
+    numberArray[1] = (Number(splitOperator2[1]));
 
     total = numberArray[0] * numberArray[1];
-
     total = Number(total.toFixed(2));
 
     numberArray[0] = total;
 
     displayCalculation.innerText = total.toString();
-
     displayCalculation.innerText = displayCalculation.innerText + "x";
+
     console.log(`number Array ${numberArray}`);
     console.log(`split operator Array ${splitOperator2}`);
     console.log("total is = " + total);
-  
     console.log("ELSE IS FIRING");
   
   }
@@ -299,7 +274,6 @@ const multiplyNumbers = () => {
 const divideNumbers = () => {
   
   let total : number = 0;
-
   dotButton.disabled = false;
 
   pressOperator.forEach((chooseOperator) => {
@@ -333,12 +307,11 @@ const divideNumbers = () => {
     numberArray[0] = total;
 
     displayCalculation.innerText = total.toString();
-
     displayCalculation.innerText = displayCalculation.innerText + "÷";
+
     console.log(`number Array ${numberArray}`);
     console.log(`split operator Array ${splitOperator2}`);
     console.log("total is = " + total);
-  
     console.log("ELSE IS FIRING");
   }
 }
@@ -353,7 +326,6 @@ const equalTotal = () => {
     if(displayCalculation.innerText.includes(storeOperator[i])) {
 
         operators = storeOperator[i];
-
         console.log(operators);
     }
   }
@@ -364,53 +336,57 @@ const equalTotal = () => {
 
     console.log("percentage total is expected");
 
-    let split7 = displayCalculation.innerText.split("%");  
-    sum = Number(split7[0]) / 100;
+    let percentageSplit = displayCalculation.innerText.split("%");  
+    sum = Number(percentageSplit[0]) / 100;
 
     displayCalculation.innerText = sum.toString();
     numberArray.length = 0;
 
-    pressOperator.forEach((chooseOperator) => {
-
-      chooseOperator.disabled = false;
-
-    });
-
   } else if(displayCalculation.innerText.endsWith(operators)) {
   
-      alert("CANNOT DO CALCULATION!");
+    alert("CANNOT DO CALCULATION!");
+    displayCalculation.innerText = "0";
+    numberArray.length = 0;
 
-      displayCalculation.innerText = "0";
-  
-      numberArray.length = 0;
-
-      pressOperator.forEach((chooseOperator) => {
-
-        chooseOperator.disabled = false;
-  
-    });  
-  
   } else {
-
+    
     switch(operators) {
-      case "+":
-        console.log("add total is expected");
-  
-        let split1 = displayCalculation.innerText.split("+");
-        sum = Number(split1[0]) + Number(split1[1]);
+      case "x":
+          let multiplySplit = displayCalculation.innerText.split("x");
+          sum = Number(multiplySplit[0]) * Number(multiplySplit[1]);
+          sum = Number(sum.toFixed(2));
+      
+          displayCalculation.innerText = sum.toString();
+          console.log(sum);
+      
+          numberArray.length = 0;
+          break;
+      
+      case "+":  
+        let addSplit = displayCalculation.innerText.split("+");
+        sum = Number(addSplit[0]) + Number(addSplit[1]);
       
         sum = Number(sum.toFixed(2));
-
+  
         displayCalculation.innerText = sum.toString();
         console.log(sum);
   
         numberArray.length = 0;
-        
+        break;
+          
+      case "÷":  
+        let divideSplit = displayCalculation.innerText.split("÷");
+        sum = Number(divideSplit[0]) / Number(divideSplit[1]);
+  
+        sum = Number(sum.toFixed(2));
+  
+        displayCalculation.innerText = sum.toString();
+        console.log(sum);
+  
+        numberArray.length = 0;
         break;
   
-      case "-":
-        console.log("minus total is expected");
-        
+      case "-":        
         subtractNumbers();
         if(displayCalculation.innerText.endsWith("-")) {
           displayCalculation.innerText = displayCalculation.innerText.substring(0,displayCalculation.innerText.length - 1);
@@ -419,58 +395,21 @@ const equalTotal = () => {
         numberArray.length = 0;
         break;
   
-      case "x":
-        console.log("times total is expected");
-  
-        let split3 = displayCalculation.innerText.split("x");
-        sum = Number(split3[0]) * Number(split3[1]);
-
-        sum = Number(sum.toFixed(2));
-  
-        displayCalculation.innerText = sum.toString();
-        console.log(sum);
-
-        // multiplyNumbers();
-        // if(displayCalculation.innerText.endsWith("x")) {
-        //   displayCalculation.innerText = displayCalculation.innerText.substring(0,displayCalculation.innerText.length - 1);
-        // }
-
-        numberArray.length = 0;
-        break;
-  
-      case "÷":
-        console.log("divide total is expected");
-
-        let split4 = displayCalculation.innerText.split("÷");
-        sum = Number(split4[0]) / Number(split4[1]);
-
-        sum = Number(sum.toFixed(2));
-  
-        displayCalculation.innerText = sum.toString();
-        console.log(sum);
-        
-        // divideNumbers();
-        // if(displayCalculation.innerText.endsWith("÷")) {
-        //   displayCalculation.innerText = displayCalculation.innerText.substring(0,displayCalculation.innerText.length - 1);
-        // }
-
-        numberArray.length = 0;
-        break;
-
       default: 
         console.log("nothing is expected");
         break;
     }
 
-    pressOperator.forEach((chooseOperator) => {
-
-      chooseOperator.disabled = false;
-
-    });
   }
+
+  pressOperator.forEach((chooseOperator) => {
+
+    chooseOperator.disabled = false;
+
+  });
 }
 
-const percentageNumbers = () => {
+const percentageNumbers = () => { //This checks the percentage button to see if the percentage has been added or not
   
   if(!displayCalculation.innerText.endsWith("%")) {
     
@@ -480,17 +419,19 @@ const percentageNumbers = () => {
 
       if(chooseOperator.value != "=") {
         chooseOperator.disabled = true;
+        dotButton.disabled = true;
       }
       
     });
 
   } else { 
+
     alert("CANNOT ADD ANOTHER PERCENTAGE!");
     displayCalculation.innerText = "0";
   }
 }
 
-const switchChange = () => {
+const switchChange = () => { //This is a onchange function where if the input type has been checked then do a specific command
 
   const displayouterHeading = document.querySelector(".displayNumber");
   const calculatorButtons = document.querySelector(".userOptions");
@@ -505,7 +446,6 @@ const switchChange = () => {
     changeFont2?.setAttribute("style", "color: black;");
 
     console.log("IS WORKING");
-    
 
   } else {
     body?.setAttribute("style", "background-color: black;");
@@ -516,7 +456,6 @@ const switchChange = () => {
 
     console.log("IS NOT WORKING");
   }
-
 }
 
 switchButtonInput.addEventListener("change", switchChange);
@@ -534,22 +473,18 @@ pressNumber.forEach((popUpNumber) => { //Loop through the array of button number
 pressOperator.forEach((popUpOperator) => { //Loop through the array of operator buttons stored when clicked
 
   popUpOperator.addEventListener("click", chosenOperator);
-
   storeOperator.push(popUpOperator.value)
-
   console.log(storeOperator);
   
-
 });
 
-const onPageLoad = () => {
+const onPageLoad = () => { //This is a on load page function when the window loadsit does a specific command
   
   body?.setAttribute("style", "background-color: #99ccff;");
-
   setTimeout(showPage, 6500); //this determines the loading time which is 3 seconds
 }
 
-const showPage = () => {
+const showPage = () => { //This is a on show function where the window is loadded then shpow the page
   const loader = document.querySelector("#loadingSection");
   const display = document.querySelector(".displayNumber");
   const display2 = document.querySelector(".userOptions");
